@@ -3,10 +3,13 @@ from sqlalchemy.orm import Session
 from . import models
 from .database import engine
 from .deps import get_db
+from .routers import user
 
 app = FastAPI()
 
 models.Base.metadata.create_all(bind=engine)
+
+app.include_router(user.router, prefix="/users", tags=["Users"])
 
 @app.post("/users")
 def create_user(name: str, email: str, db: Session = Depends(get_db)):
@@ -19,3 +22,7 @@ def create_user(name: str, email: str, db: Session = Depends(get_db)):
 @app.get("/users")
 def get_users(db: Session = Depends(get_db)):
     return db.query(models.User).all()
+
+@app.get("/")
+def home():
+    return {"message": "API is working"}

@@ -18,3 +18,14 @@
    pip install -r requirements.txt
 3. Run server:
    uvicorn backend.main:app --reload
+
+## Day 3 Progress
+- Refactored backend into modular structure (routers + services)
+- Implemented pagination (skip, limit)
+- Implemented filtering (search users by name)
+- Improved API structure for scalability
+
+## API Features
+- Create User
+- Get Users (with pagination)
+- Search Users by name
